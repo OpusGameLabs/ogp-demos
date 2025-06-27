@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Game Registration Form</title>
+    <link rel="stylesheet" href="game-registration.css" />
+  </head>
+  <body>
+    <div class="content">
+      <div class="form-header">
+        <h1>Game Registration</h1>
+        <p>Register your game with OpenGame Protocol</p>
+      </div>
+
+      <div class="form-container">
+        <form id="gameRegistrationForm">
+          <!-- Game Name -->
+          <div class="form-group">
+            <label for="gameName" class="required">Game Name</label>
+            <input
+              type="text"
+              id="gameName"
+              class="form-input"
+              placeholder="Enter your game name"
+              required
+            />
+            <div class="error-message" id="gameNameError"></div>
+          </div>
+
+          <!-- Game URL -->
+          <div class="form-group">
+            <label for="gameUrl" class="required">Game URL</label>
+            <div class="url-input-container" id="gameUrlContainer">
+              <span class="url-prefix">https://</span>
+              <input
+                type="text"
+                id="gameUrl"
+                class="url-input"
+                placeholder="yourgame.com"
+                required
+              />
+            </div>
+            <div class="error-message" id="gameUrlError"></div>
+          </div>
+
+          <!-- Token Selector Widget (OGPTokenSelect) -->
+          <div class="form-group">
+            <label>Associated Tokens (Optional)</label>
+            <div
+              id="token-selector-widget-container"
+              style="
+                border: 2px solid #e1e5e9;
+                border-radius: 8px;
+                padding: 6px;
+                background: white; /* Ensure container background is white */
+              "
+            >
+              <!-- The widget will be loaded here -->
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label for="gameDescription" class="required">Description</label>
+            <textarea
+              id="gameDescription"
+              class="form-textarea"
+              placeholder="Describe your game..."
+              required
+            ></textarea>
+            <div class="error-message" id="gameDescriptionError"></div>
+          </div>
+
+          <!-- Game Image Upload -->
+          <div class="form-group">
+            <label for="gameImage" class="required">Game Image</label>
+            <div class="file-upload-container">
+              <input
+                type="file"
+                id="gameImage"
+                class="file-input"
+                accept="image/jpeg,image/png,image/gif,image/webp"
+                required
+              />
+              <label for="gameImage" class="file-upload-label">
+                <div class="file-upload-content">
+                  <div class="file-upload-icon">📷</div>
+                  <div class="file-upload-text">
+                    <span class="file-upload-title">Choose Game Image</span>
+                    <span class="file-upload-hint"
+                      >JPG, PNG, GIF, WEBP up to 5MB</span
+                    >
+                  </div>
+                </div>
+              </label>
+              <div class="image-preview" id="gameImagePreview"></div>
+            </div>
+            <div class="error-message" id="gameImageError"></div>
+          </div>
+
+          <!-- Cover Image Upload -->
+          <div class="form-group">
+            <label for="coverImage">Cover Image (Optional)</label>
+            <div class="file-upload-container">
+              <input
+                type="file"
+                id="coverImage"
+                class="file-input"
+                accept="image/jpeg,image/png,image/gif,image/webp"
+              />
+              <label for="coverImage" class="file-upload-label">
+                <div class="file-upload-content">
+                  <div class="file-upload-icon">🖼️</div>
+                  <div class="file-upload-text">
+                    <span class="file-upload-title">Choose Cover Image</span>
+                    <span class="file-upload-hint"
+                      >JPG, PNG, GIF, WEBP up to 5MB</span
+                    >
+                  </div>
+                </div>
+              </label>
+              <div class="image-preview" id="coverImagePreview"></div>
+            </div>
+            <div class="error-message" id="coverImageError"></div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="form-group">
+            <label for="twitter">Twitter (Optional)</label>
+            <div class="url-input-container" id="twitterContainer">
+              <span class="url-prefix">https://twitter.com/</span>
+              <input
+                type="text"
+                id="twitter"
+                class="url-input"
+                placeholder="username"
+              />
+            </div>
+            <div class="error-message" id="twitterError"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="discord">Discord (Optional)</label>
+            <div class="url-input-container" id="discordContainer">
+              <span class="url-prefix">https://discord.gg/</span>
+              <input
+                type="text"
+                id="discord"
+                class="url-input"
+                placeholder="invite-code"
+              />
+            </div>
+            <div class="error-message" id="discordError"></div>
+          </div>
+
+          <!-- Developer Rewards -->
+          <div class="form-group">
+            <label>Developer Rewards (Optional)</label>
+            <div id="developerRewardsContainer">
+              <div class="developer-row">
+                <div class="developer-input-group">
+                  <input
+                    type="text"
+                    class="form-input developer-id"
+                    placeholder="Developer ID"
+                  />
+                  <input
+                    type="number"
+                    class="form-input developer-reward"
+                    placeholder="Reward %"
+                    min="0"
+                    max="100"
+                    step="1"
+                  />
+                </div>
+                <button type="button" class="remove-developer-btn" style="display: none;">×</button>
+              </div>
+            </div>
+            <button type="button" id="addDeveloperBtn" class="add-developer-btn">
+              <span>+</span> Add Developer
+            </button>
+          </div>
+
+          <!-- HTML Game Checkbox -->
+          <div class="form-group">
+            <div class="checkbox-group">
+              <input type="checkbox" id="isHTMLGame" checked />
+              <label for="isHTMLGame">Is HTML Game</label>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <span id="submitText">Register Game</span>
+            <span
+              id="submitSpinner"
+              class="spinner"
+              style="display: none"
+            ></span>
+          </button>
+
+          <!-- Response Message -->
+          <div class="response-message" id="responseMessage"></div>
+
+          <!-- Authentication Note -->
+          <div
+            style="
+              margin-top: 20px;
+              padding: 15px;
+              background: #fff3cd;
+              border: 1px solid #ffeaa7;
+              border-radius: 8px;
+              font-size: 12px;
+              color: #856404;
+            "
+          >
+            <strong>Note:</strong> This demo uses HMAC signature authentication
+            with your API_KEY and SECRET_KEY. The form will automatically
+            generate the required signature for each request.
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.opengameprotocol.com/ogp-token-select-widget.js"></script>
+    <script src="game-registration.js"></script>
+  </body>
+</html>
