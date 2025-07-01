@@ -1,8 +1,20 @@
 // =============================================================================
-// OGP GAME REGISTRATION - API CONFIGURATION
+// OGP GAME REGISTRATION - DEMO FRONTEND CONFIGURATION
 // =============================================================================
-
-// Get your pre-release keys at: https://onboarding.opengameprotocol.com/
+//
+// ⚠️ IMPORTANT:
+// This demo is intended for frontend-only use during development or testing.
+// In a real production application, you should NOT expose your SECRET_KEY
+// in client-side code, as it poses a significant security risk.
+//
+// Instead, API requests involving authentication (e.g., signature generation)
+// should be routed through your own secure backend.
+//
+// For full integration details, refer to:
+// https://docs.opengameprotocol.com/7Cx0vTSGe7N68FP9dlE8/build-on-og/open-game-endpoints
+//
+// You can get pre-release keys at:
+// https://onboarding.opengameprotocol.com/
 const API_KEY = 'your-api-key-here';
 const SECRET_KEY = 'your-secret-key-here';
 
