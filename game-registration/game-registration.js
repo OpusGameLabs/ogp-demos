@@ -19,7 +19,7 @@ const API_KEY = 'your-api-key-here';
 const SECRET_KEY = 'your-secret-key-here';
 
 // API endpoints - Documentation: https://docs.opengameprotocol.com/7Cx0vTSGe7N68FP9dlE8/build-on-og/open-game-endpoints
-const ENDPOINT_BASE_URL = 'https://api.staging.opengameprotocol.com';
+const ENDPOINT_BASE_URL = 'https://api.opengameprotocol.com';
 const REGISTER_GAME_ENDPOINT = 'market/registerGame';
 
 // =============================================================================
