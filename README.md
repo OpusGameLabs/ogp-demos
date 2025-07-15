@@ -26,6 +26,14 @@ This demo shows how to:
 - Use the OGP game registration endpoint
 - Integrate the OGP Token Selector widget
 
+### 2. Simple Game Demo (`simple-game/`)
+
+This demo shows how to:
+- Initialize and configure the OpenGameSDK
+- Track player points in real-time using `addPoints()`
+- Save final scores using `savePoints()`
+- Handle SDK events (`OnReady`, `OnSessionStarted`)
+
 ## Resources
 
 - **SDK Documentation**: [Open Game SDK](https://docs.opengameprotocol.com/7Cx0vTSGe7N68FP9dlE8/build-on-og/open-game-sdk) - For authentication, score tracking, and player rewards

@@ -1,0 +1,92 @@
+/* Base body styles */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: white;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+/* Centered content container */
+.content {
+  text-align: center;
+  width: 100%;
+  max-width: 375px; /* Mobile-sized width */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Styling for the counter */
+.counter {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Container for buttons */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Styling for the main game buttons */
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  min-width: 200px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* End game button styling */
+#endGameButton {
+  background-color: #dc3545;
+}
+
+#endGameButton:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 375px) {
+  .content {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .counter {
+    font-size: 36px;
+  }
+  
+  button {
+    font-size: 16px;
+    padding: 12px 24px;
+    min-width: 180px;
+  }
+}
+
+@media (min-width: 376px) {
+  .content {
+    width: 375px; /* This ensures content is capped at a mobile size */
+  }
+} 
