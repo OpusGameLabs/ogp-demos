@@ -34,6 +34,14 @@ This demo shows how to:
 - Save final scores using `savePoints()`
 - Handle SDK events (`OnReady`, `OnSessionStarted`)
 
+### 3. Claim Creator Rewards Demo (`claim-creator-rewards/`)
+
+This demo shows how to:
+- Claim creator rewards using `claimCreatorRewards()`
+- Handle async SDK operations with proper error handling
+- Provide user feedback during claim operations
+- Implement a simplified single-purpose SDK integration
+
 ## Resources
 
 - **SDK Documentation**: [Open Game SDK](https://docs.opengameprotocol.com/7Cx0vTSGe7N68FP9dlE8/build-on-og/open-game-sdk) - For authentication, score tracking, and player rewards

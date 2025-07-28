@@ -1,0 +1,95 @@
+/* Base body styles */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: white;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+/* Centered content container */
+.content {
+  text-align: center;
+  width: 100%;
+  max-width: 375px; /* Mobile-sized width */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Styling for the title */
+h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Styling for the description */
+p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+/* Container for buttons */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Styling for the main claim button */
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #28a745;
+  color: white;
+  min-width: 250px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 375px) {
+  .content {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  h1 {
+    font-size: 28px;
+  }
+  
+  p {
+    font-size: 14px;
+  }
+  
+  button {
+    font-size: 16px;
+    padding: 12px 24px;
+    min-width: 220px;
+  }
+}
+
+@media (min-width: 376px) {
+  .content {
+    width: 375px; /* This ensures content is capped at a mobile size */
+  }
+} 
