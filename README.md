@@ -20,13 +20,7 @@ For detailed onboarding instructions, visit the [Game Developer Onboarding Guide
 
 Each demo project is contained in its own subfolder with complete implementation examples.
 
-### 1. Game Registration Demo (`game-registration/`)
-
-This demo shows how to:
-- Use the OGP game registration endpoint
-- Integrate the OGP Token Selector widget
-
-### 2. Simple Game Demo (`simple-game/`)
+### Simple Game Demo (`simple-game/`)
 
 This demo shows how to:
 - Initialize and configure the OpenGameSDK
@@ -34,13 +28,19 @@ This demo shows how to:
 - Save final scores using `savePoints()`
 - Handle SDK events (`OnReady`, `OnSessionStarted`)
 
-### 3. Claim Creator Rewards Demo (`claim-creator-rewards/`)
+### Claim Creator Rewards Demo (`claim-creator-rewards/`)
 
 This demo shows how to:
 - Claim creator rewards using `claimCreatorRewards()`
 - Handle async SDK operations with proper error handling
 - Provide user feedback during claim operations
 - Implement a simplified single-purpose SDK integration
+
+### Game Registration Demo (`game-registration/`)
+
+This demo shows how to:
+- Use the OGP game registration endpoint
+- Integrate the OGP Token Selector widget
 
 ## Resources
 
