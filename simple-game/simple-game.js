@@ -19,9 +19,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   // Placeholder values - replace with actual values in production
-  const playerId = 'placeholder-player-id';  // Replace with actual player ID. Note, this is an optional parameter.
   const gameId = 'your-game-id-here';        // Replace with your registered game ID.
-
+  const playerId = 'placeholder-player-id';  // Replace with actual player ID. Note, this is an optional parameter.
+  
   console.log('Simple Game Demo - Initializing...');
 
   // SDK is already loaded via script tag in HTML, initialize directly
@@ -60,9 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Set up the game UI and logic
     setupGameLogic(ogp);
-
-    // Mark game as ready to play - this tells the SDK the game is loaded
-    ogp.gameReadyToPlay();
   }
 
   // =============================================================================
