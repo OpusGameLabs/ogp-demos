@@ -8,6 +8,7 @@ ehthumbs.db
 Thumbs.db
 
 # Node.js
+build/
 node_modules/
 npm-debug.log*
 yarn-debug.log*
