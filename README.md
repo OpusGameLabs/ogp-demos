@@ -28,6 +28,14 @@ This demo shows how to:
 - Save final scores using `savePoints()`
 - Handle SDK events (`OnReady`, `OnSessionStarted`)
 
+### React Demo (`react-demo/`)
+
+This demo shows how to:
+- Initialize and configure the OpenGameSDK in a React application
+- Track player points in real-time using `addPoints()`
+- Save final scores using `savePoints()`
+- Implement SDK functionality with React hooks and state management
+
 ### Claim Creator Rewards Demo (`claim-creator-rewards/`)
 
 This demo shows how to:
