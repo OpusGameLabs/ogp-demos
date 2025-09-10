@@ -8,7 +8,8 @@ A simple React application demonstrating the integration of OpenGameSDK for game
 - Real-time points updates
 - Points saving functionality
 - Integration with OpenGameSDK's points widget
-- Claim rewards through OpenGameProtocol 
+- Claim rewards through OpenGameProtocol
+- SDK ready state handling with conditional UI rendering
 
 ## Prerequisites
 
@@ -44,7 +45,11 @@ The demo showcases the following OpenGameSDK features:
 ## Code Example
 
 ```typescript
-import OpenGameSDK, { SDKOpts } from "@opusgamelabs/game-sdk";
+import OpenGameSDK, { SDKEvents, SDKOpts } from "@opusgamelabs/game-sdk";
+import { useState } from 'react';
+
+// Track SDK ready state
+const [sdkReady, setSdkReady] = useState(false);
 
 // Initialize SDK with points widget
 const sdk = new OpenGameSDK({ 
@@ -58,11 +63,18 @@ await sdk.init({
   gameId: 'your-game-id'
 });
 
-// Add points
-sdk.addPoints(1);
+// Listen for SDK ready event
+sdk.on(SDKEvents.OnReady, () => {
+  console.log('🚀 OpenGameSDK is ready');
+  setSdkReady(true);
+});
 
-// Save points
-await sdk.savePoints(points);
+// Conditional rendering based on SDK ready state
+{sdkReady ? (
+  <button onClick={() => sdk.addPoints(1)}>Add points</button>
+) : (
+  <p>Loading...</p>
+)}
 ```
 
 ## Project Structure
