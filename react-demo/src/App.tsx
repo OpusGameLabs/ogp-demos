@@ -1,11 +1,12 @@
 import './App.css';
-import OpenGameSDK, { SDKOpts } from "@opusgamelabs/game-sdk";
+import OpenGameSDK, { SDKEvents, SDKOpts } from "@opusgamelabs/game-sdk";
 
 import { useState, useEffect } from 'react';
 
 function App() {
   const [points, setPoints] = useState<number>(0);
   const [sdk, setSdk] = useState<OpenGameSDK | undefined>();
+  const [sdkReady, setSdkReady] = useState(false);
 
   useEffect(() => {
     setSdk(new OpenGameSDK({ ui: { usePointsWidget: true }} as SDKOpts));
@@ -24,18 +25,30 @@ function App() {
     if (sdk) await sdk.savePoints(points);
   }
 
+  sdk?.on(SDKEvents.OnReady, () => {
+      console.log('🚀 OpenGameSDK is ready');
+      setSdkReady(true);
+    });
+
   return (
     <div className="App">
       <header className="App-header">
         <p>
           Points: {points}
         </p>
-        <button onClick={updatePoints}>
-          Add point
-        </button>
-        <button onClick={savePoints}>
-          Save score
-        </button>
+        {sdkReady ?
+        <>
+          <button onClick={updatePoints}>
+            Add point
+          </button>
+          <button onClick={savePoints}>
+            Save score
+          </button> 
+        </> :
+        <>
+          <p>Loading...</p>
+        </>
+        }
       </header>
     </div>
   );
