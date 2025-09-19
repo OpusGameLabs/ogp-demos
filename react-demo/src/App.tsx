@@ -9,11 +9,11 @@ function App() {
   const [sdkReady, setSdkReady] = useState(false);
 
   useEffect(() => {
-    setSdk(new OpenGameSDK({ ui: { usePointsWidget: true }} as SDKOpts));
+    setSdk(new OpenGameSDK({ ui: { usePointsWidget: true } } as SDKOpts));
   }, []);
 
   useEffect(() => {
-    if(sdk) sdk.init({ gameId: 'insert-game-id-here' });
+    if (sdk) sdk.init({ gameId: '3a19bc9a-a866-47a2-94df-8f93ba83c39a' });
   }, [sdk]);
 
   function updatePoints(): void {
@@ -26,9 +26,9 @@ function App() {
   }
 
   sdk?.on(SDKEvents.OnReady, () => {
-      console.log('🚀 OpenGameSDK is ready');
-      setSdkReady(true);
-    });
+    console.log('🚀 OpenGameSDK is ready');
+    setSdkReady(true);
+  });
 
   return (
     <div className="App">
@@ -37,17 +37,17 @@ function App() {
           Points: {points}
         </p>
         {sdkReady ?
-        <>
-          <button onClick={updatePoints}>
-            Add point
-          </button>
-          <button onClick={savePoints}>
-            Save score
-          </button> 
-        </> :
-        <>
-          <p>Loading...</p>
-        </>
+          <>
+            <button onClick={updatePoints}>
+              Add point
+            </button>
+            <button onClick={savePoints}>
+              Save score
+            </button>
+          </> :
+          <>
+            <p>Loading...</p>
+          </>
         }
       </header>
     </div>
