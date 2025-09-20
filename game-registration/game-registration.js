@@ -67,10 +67,21 @@ async function getSignature() {
 async function registerGame(gameData) {
   const signature = await getSignature();
 
+  if (
+    !gameData.name
+    || !gameData.image
+    || !gameData.gameUrl
+    || !gameData.isHTMLGame
+    || !gameData.tokens || gameData.tokens.length === 0
+  ) {
+    throw new Error('Missing required fields');
+  }
+
   const payload = {
     name: gameData.name,
     description: gameData.description || undefined,
     gameUrl: formatUrl(gameData.gameUrl),
+    image: gameData.image,
     platform: 'web',
     isHTMLGame: gameData.isHTMLGame,
     tokens: gameData.tokens,
@@ -79,9 +90,6 @@ async function registerGame(gameData) {
   // Add optional fields if provided
   if (gameData.developers && gameData.developers.length > 0) {
     payload.developers = gameData.developers;
-  }
-  if (gameData.image) {
-    payload.image = gameData.image;
   }
   if (gameData.coverImage) {
     payload.coverImage = gameData.coverImage;
@@ -257,7 +265,7 @@ function validateUrl(url, fieldName) {
   if (!url) return null; // Optional field
 
   const cleanUrl = url.replace(/^https?:\/\//, '');
-  
+
   // Flexible URL pattern for various formats
   const urlPattern =
     /^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*(\/[a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=%]*)?$/;
@@ -450,9 +458,8 @@ function clearErrors() {
  */
 function showResponse(message, isSuccess = false) {
   responseMessage.textContent = message;
-  responseMessage.className = `response-message ${
-    isSuccess ? 'success' : 'error'
-  }`;
+  responseMessage.className = `response-message ${isSuccess ? 'success' : 'error'
+    }`;
 }
 
 /**
@@ -496,7 +503,7 @@ function addDeveloperRow() {
   `;
 
   const removeBtn = newRow.querySelector('.remove-developer-btn');
-  removeBtn.addEventListener('click', function() {
+  removeBtn.addEventListener('click', function () {
     removeDeveloperRow(newRow);
   });
 
@@ -519,7 +526,7 @@ function removeDeveloperRow(row) {
 function updateRemoveButtons() {
   const rows = document.querySelectorAll('.developer-row');
   const removeButtons = document.querySelectorAll('.remove-developer-btn');
-  
+
   removeButtons.forEach((btn, index) => {
     if (rows.length === 1) {
       btn.style.display = 'none';
@@ -536,14 +543,14 @@ function updateRemoveButtons() {
 function getDeveloperRewardsData() {
   const developers = [];
   const rows = document.querySelectorAll('.developer-row');
-  
+
   rows.forEach(row => {
     const idInput = row.querySelector('.developer-id');
     const rewardInput = row.querySelector('.developer-reward');
-    
+
     const id = idInput.value.trim();
     const reward = parseFloat(rewardInput.value);
-    
+
     if (id && !isNaN(reward) && reward > 0) {
       developers.push({
         id: id,
@@ -551,7 +558,7 @@ function getDeveloperRewardsData() {
       });
     }
   });
-  
+
   return developers;
 }
 
@@ -822,10 +829,10 @@ document
 document.getElementById('addDeveloperBtn').addEventListener('click', addDeveloperRow);
 
 // Initialize developer rewards on page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const initialRemoveBtn = document.querySelector('.remove-developer-btn');
   if (initialRemoveBtn) {
-    initialRemoveBtn.addEventListener('click', function() {
+    initialRemoveBtn.addEventListener('click', function () {
       removeDeveloperRow(this.closest('.developer-row'));
     });
   }
