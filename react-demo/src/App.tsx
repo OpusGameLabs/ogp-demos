@@ -25,6 +25,10 @@ function App() {
     if (sdk) await sdk.savePoints(points);
   }
 
+  async function login(): Promise<void> {
+    if (sdk) await sdk.login();
+  }
+
   sdk?.on(SDKEvents.OnReady, () => {
     console.log('🚀 OpenGameSDK is ready');
     setSdkReady(true);
@@ -38,6 +42,7 @@ function App() {
         </p>
         {sdkReady ?
           <>
+            <button onClick={login}>Demo Login</button>
             <button onClick={updatePoints}>
               Add point
             </button>
