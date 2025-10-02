@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>OGP Claim Widget Example - New Architecture</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Helvetica, Arial, sans-serif;
+        padding: 2em;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 16px;
+        padding: 2.5rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: #667eea;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      .info-box {
+        background: #f8f9fa;
+        border-left: 4px solid #667eea;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        border-radius: 8px;
+      }
+
+      .info-box h3 {
+        margin-bottom: 0.5rem;
+        color: #667eea;
+        font-size: 1.1rem;
+      }
+
+      .info-box ul {
+        margin-left: 1.5rem;
+        margin-top: 0.5rem;
+      }
+
+      .info-box li {
+        margin-bottom: 0.5rem;
+        line-height: 1.5;
+        font-size: 0.95rem;
+      }
+
+      .demo-section {
+        margin: 2rem 0;
+      }
+
+      .demo-section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        color: #333;
+      }
+
+      .button-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .button-demo {
+        padding: 1.5rem;
+        background: #f8f9fa;
+        border-radius: 12px;
+        text-align: center;
+      }
+
+      .button-demo h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: #555;
+      }
+
+      .button-demo p {
+        font-size: 0.85rem;
+        color: #777;
+        margin-bottom: 1rem;
+      }
+
+      code {
+        background: #e9ecef;
+        padding: 0.2rem 0.4rem;
+        border-radius: 3px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
+      }
+
+      .highlight {
+        background: #667eea;
+        color: white;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎮 OGP Claim Widget - New Architecture</h1>
+      <p class="subtitle">
+        Standalone button with fullscreen transparent iframe overlay
+      </p>
+
+      <div class="demo-section">
+        <h2>Try the Buttons</h2>
+        <p style="margin-bottom: 1rem; color: #666;">
+          Click any button below to trigger the claim flow. The modal will appear at the bottom-center of your screen.
+        </p>
+        
+        <div class="button-grid">
+          <div class="button-demo">
+            <h3>Default</h3>
+            <p>Standard green button</p>
+            <!-- Use the data-ogp-claim-button attribute to trigger the claim flow -->
+            <button data-ogp-claim-button="default-btn"> 
+              Claim Rewards
+            </button>
+          </div>
+
+          <div class="button-demo">
+            <h3>Inverse</h3>
+            <p>Dark variant</p>
+            <button 
+              data-ogp-claim-button="inverse-btn"
+              data-variant="inverse">
+              Claim Rewards
+            </button>
+          </div>
+
+          <div class="button-demo">
+            <h3>Large</h3>
+            <p>Bigger size</p>
+            <button 
+              data-ogp-claim-button="large-btn"
+              data-size="lg">
+              Claim Rewards
+            </button>
+          </div>
+
+          <div class="button-demo">
+            <h3>Small</h3>
+            <p>Compact size</p>
+            <button 
+              data-ogp-claim-button="small-btn"
+              data-size="sm">
+              Claim Rewards
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Load the new standalone button module -->
+    <script src="https://cdn.opengameprotocol.com/ogp-claim-button.staging.min.js"></script>
+
+    <script>
+      // Optional: Set your own icon for the widget to use
+      OGPClaimButton.setIcon('https://example.com/assets/my-icon.png');
+      // Optional: Set the theme dark/light
+      OGPClaimButton.setTheme('dark');
+    </script>
+  </body>
+</html>
