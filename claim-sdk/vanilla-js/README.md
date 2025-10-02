@@ -24,6 +24,8 @@ OGPClaimButton.setIcon(
 );
 ```
 
-## Demo
+or the theme with `OGPClaimButton.setTheme`:
 
-Check out the [demo](https://max-web.github.io/ogp-demos/claim-sdk/vanilla-js/) to see the standalone button in action.
+```js
+OGPClaimButton.setTheme("dark");
+```
