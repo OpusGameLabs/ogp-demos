@@ -10,7 +10,7 @@ Before using these demos, you'll need to register as a game developer:
 2. **Get Your API Keys**: You'll receive a Public API Key and Secret for server-side requests
 3. **Add Developer Ownership**: Add the meta tag to your game's HTML entry point:
    ```html
-   <meta name="x-ogp-key" content="YOUR_API_KEY">
+   <meta name="x-ogp-key" content="YOUR_API_KEY" />
    ```
 4. **Verify Ownership**: Return to the onboarding app and claim ownership of your game
 
@@ -23,6 +23,7 @@ Each demo project is contained in its own subfolder with complete implementation
 ### Simple Game Demo (`simple-game/`)
 
 This demo shows how to:
+
 - Initialize and configure the OpenGameSDK
 - Track player points in real-time using `addPoints()`
 - Save final scores using `savePoints()`
@@ -31,23 +32,27 @@ This demo shows how to:
 ### React Demo (`react-demo/`)
 
 This demo shows how to:
+
 - Initialize and configure the OpenGameSDK in a React application
 - Track player points in real-time using `addPoints()`
 - Save final scores using `savePoints()`
 - Handle SDK events (`OnReady`)
 - Implement SDK functionality with React hooks and state management
 
-### Claim Creator Rewards Demo (`claim-creator-rewards/`)
+### Claim SDK Demo (`claim-sdk/`)
 
-This demo shows how to:
-- Claim creator rewards using `claimCreatorRewards()`
-- Handle async SDK operations with proper error handling
-- Provide user feedback during claim operations
-- Implement a simplified single-purpose SDK integration
+The Claim SDK can be implemented in 2 different ways.
+
+If you are building a website in React, you can use the `@opusgamelabs/claim-react` package and follow the [React Demo](https://github.com/OpusGameLabs/ogp-demos/tree/main/claim-sdk/react) instructions.
+
+If you are building a website in vanilla JS, you can use the standalone button implementation in the [Vanilla JS Demo](https://github.com/OpusGameLabs/ogp-demos/tree/main/claim-sdk/vanilla-js) instructions.
+
+The Vanilla JS implementation uses a standalone `ogp-claim-button` script that you can include in your project. This script will load an invisible iFrame widget that will trigger when users click the claim button.
 
 ### Game Registration Demo (`game-registration/`)
 
 This demo shows how to:
+
 - Use the OGP game registration endpoint
 - Integrate the OGP Token Selector widget
 
