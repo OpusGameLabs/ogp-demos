@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# @opusgamelabs/claim-react
 
-## Getting Started
+React components for Open Game Protocol rewards system.
 
-First, run the development server:
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install @opusgamelabs/claim-react
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. Import the Styles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**IMPORTANT:** You must import the CSS file in your application for the components to be styled correctly.
 
-## Learn More
+Add this import at the top level of your application (e.g., in your main `App.tsx` or `index.tsx`):
 
-To learn more about Next.js, take a look at the following resources:
+```tsx
+import "@opusgamelabs/claim-react/styles.css";
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Use the OGPClaimProvider
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```tsx
+import { OGPClaimProvider, OGPClaimButton } from "@opusgamelabs/claim-react";
 
-## Deploy on Vercel
+function App() {
+  return <OGPClaimProvider>{children}</OGPClaimProvider>;
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Styling
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This package includes:
+
+- **Tailwind CSS** - All Tailwind utility classes used by the components
+- **Custom Theme** - Pre-configured color palette, fonts, and animations
+- **Custom Fonts** - PPNeueMontreal font family (Regular, Medium, Bold)
+- **Dark Mode Support** - Automatic dark mode styling with the `dark` class
+
+### Theme Colors
+
+The package includes a comprehensive color system:
+
+**Light Mode:**
+
+- Background: `bg-site-light-background`
+- Panel: `bg-site-light-panel`
+- Text: `text-site-light-text-primary`, `text-site-light-text-secondary`
+- Accent: `text-site-light-accent-blue`, `text-site-light-accent-green`
+
+**Dark Mode:**
+
+- Background: `bg-site-dark-background`
+- Panel: `bg-site-dark-panel`
+- Text: `text-site-dark-text-primary`, `text-site-dark-text-secondary`
+- Accent: `text-site-dark-accent-blue`, `text-site-dark-accent-green`
+
+### Custom Fonts
+
+The package includes the PPNeueMontreal font family:
+
+- `font-neue` - Regular weight
+- `font-neue-medium` - Medium weight
+- `font-neue-bold` - Bold weight
+
+### Animations
+
+Pre-configured animations:
+
+- `animate-slide-up` - Slide up with fade in
+- `animate-slide-down` - Slide down with fade out
+- `animate-fade-in` - Fade in
+- `animate-fade-out` - Fade out
+
+## API Reference
+
+### Components
+
+- `OGPClaimProvider` - Context provider for claim functionality
+- `OGPClaimButton` - Pre-built claim button component
+- `OGPClaimModal` - Modal component for claims
+- `ClaimModal` - Pre-built claim modal screen
+- `LoginModal` - Pre-built login modal screen
+- `LoadingModal` - Pre-built loading modal screen
+- `NoRewardsModal` - Pre-built no rewards modal screen
+
+### Hooks
+
+- `useOGPClaim` - Access claim context and state
+- `useClaimRewards` - Hook for claiming rewards
+- `usePlayerRewards` - Hook for fetching player rewards
+
+### Types
+
+See the TypeScript definitions for complete type information.
+
+## Development
+
+### Building
+
+```bash
+npm run build
+```
+
+This will:
+
+1. Compile CSS with Tailwind (minified)
+2. Compile TypeScript to JavaScript
+3. Copy font files to dist
+
+### Cleaning
+
+```bash
+npm run clean
+```
+
+## License
+
+See LICENSE.md
