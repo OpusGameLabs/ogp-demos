@@ -10,6 +10,28 @@ To run the demo, you'll need to have Node.js installed on your machine.
 2. Run the development server with `pnpm dev`
 3. Open your browser to `http://localhost:3000`
 
+## Using the package in your own project
+
+To use the package in your own project, you'll need to install it using your preferred package manager.
+
+```bash
+npm install @opusgamelabs/claim-react
+```
+
+Then, you can import styles and components from the package.
+
+## Importing Styles
+
+**IMPORTANT:** You must import the CSS file in your application for the components to be styled correctly.
+
+Add this import at the top level of your application (e.g., in your main `App.tsx` or `index.tsx`):
+
+```tsx
+import "@opusgamelabs/claim-react/styles.css";
+```
+
+**Note:** The styles are scoped to avoid conflicts with your application's styles. All Tailwind utilities use the `ogp-` prefix, and font declarations are scoped within the component wrapper. This ensures the package won't override your existing Tailwind configuration or custom styles.
+
 ## Authentication
 
 We support using our default authentication flow using our built-in Privy integration, or you can use your own authentication flow by using a custom auth provider.
