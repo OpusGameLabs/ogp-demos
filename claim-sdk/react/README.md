@@ -1,121 +1,154 @@
-# @opusgamelabs/claim-react
+# @opusgamelabs/claim-react Demo
 
-React components for Open Game Protocol rewards system.
+This is a demo of the `@opusgamelabs/claim-react` package.
 
-## Installation
+## Running the Demo
 
-```bash
-npm install @opusgamelabs/claim-react
-```
+To run the demo, you'll need to have Node.js installed on your machine.
 
-## Usage
+1. Install dependencies with `pnpm install`
+2. Run the development server with `pnpm dev`
+3. Open your browser to `http://localhost:3000`
 
-### 1. Import the Styles
+## Authentication
 
-**IMPORTANT:** You must import the CSS file in your application for the components to be styled correctly.
+We support using our default authentication flow using our built-in Privy integration, or you can use your own authentication flow by using a custom auth provider.
 
-Add this import at the top level of your application (e.g., in your main `App.tsx` or `index.tsx`):
+### Default Auth
 
-```tsx
-import "@opusgamelabs/claim-react/styles.css";
-```
-
-### 2. Use the OGPClaimProvider
+To use the default authentication flow, simply wrap your app in `<OGPClaimProvider>` and use either the `<OGPClaimButton>` or `useOGPClaim` hook to interact with the SDK.
 
 ```tsx
-import { OGPClaimProvider, OGPClaimButton } from "@opusgamelabs/claim-react";
+import { OGPClaimProvider } from "@opusgamelabs/claim-react";
 
 function App() {
   return <OGPClaimProvider>{children}</OGPClaimProvider>;
 }
 ```
 
-## Styling
+### Custom Auth
 
-This package includes:
+To use a custom authentication flow, you'll need to use a custom auth provider. You will need to implement the following hook:
 
-- **Tailwind CSS** - All Tailwind utility classes used by the components
-- **Custom Theme** - Pre-configured color palette, fonts, and animations
-- **Custom Fonts** - PPNeueMontreal font family (Regular, Medium, Bold)
-- **Dark Mode Support** - Automatic dark mode styling with the `dark` class
-
-### Theme Colors
-
-The package includes a comprehensive color system:
-
-**Light Mode:**
-
-- Background: `bg-site-light-background`
-- Panel: `bg-site-light-panel`
-- Text: `text-site-light-text-primary`, `text-site-light-text-secondary`
-- Accent: `text-site-light-accent-blue`, `text-site-light-accent-green`
-
-**Dark Mode:**
-
-- Background: `bg-site-dark-background`
-- Panel: `bg-site-dark-panel`
-- Text: `text-site-dark-text-primary`, `text-site-dark-text-secondary`
-- Accent: `text-site-dark-accent-blue`, `text-site-dark-accent-green`
-
-### Custom Fonts
-
-The package includes the PPNeueMontreal font family:
-
-- `font-neue` - Regular weight
-- `font-neue-medium` - Medium weight
-- `font-neue-bold` - Bold weight
-
-### Animations
-
-Pre-configured animations:
-
-- `animate-slide-up` - Slide up with fade in
-- `animate-slide-down` - Slide down with fade out
-- `animate-fade-in` - Fade in
-- `animate-fade-out` - Fade out
-
-## API Reference
-
-### Components
-
-- `OGPClaimProvider` - Context provider for claim functionality
-- `OGPClaimButton` - Pre-built claim button component
-- `OGPClaimModal` - Modal component for claims
-- `ClaimModal` - Pre-built claim modal screen
-- `LoginModal` - Pre-built login modal screen
-- `LoadingModal` - Pre-built loading modal screen
-- `NoRewardsModal` - Pre-built no rewards modal screen
-
-### Hooks
-
-- `useOGPClaim` - Access claim context and state
-- `useClaimRewards` - Hook for claiming rewards
-- `usePlayerRewards` - Hook for fetching player rewards
-
-### Types
-
-See the TypeScript definitions for complete type information.
-
-## Development
-
-### Building
-
-```bash
-npm run build
+```tsx
+const { getToken, isLoading, isAuthenticated } = useAuth();
 ```
 
-This will:
+The `getToken` function should return a promise that resolves to either a string with the access token of the user, or undefined if the user is not authenticated.
 
-1. Compile CSS with Tailwind (minified)
-2. Compile TypeScript to JavaScript
-3. Copy font files to dist
+The `isLoading` boolean should be true if the user is authenticating, and false if the user is not authenticating.
 
-### Cleaning
+The `isAuthenticated` boolean should be true if the user is authenticated, and false if the user is not authenticated.
 
-```bash
-npm run clean
+You can then pass this custom auth provider to the `customAuthConfig` prop of the `<OGPClaimProvider>`.
+
+**Important:** The `<OGPClaimProvider>` MUST be a child of your custom auth provider component.
+
+```tsx
+import { OGPClaimProvider } from "@opusgamelabs/claim-react";
+
+function App() {
+  return (
+    <MyCustomAuthProvider>
+      <OGPClaimProvider
+        config={{
+          useCustomAuth: true,
+          customAuthConfig: {
+            useAuthHook: useCustomAuth,
+          },
+        }}
+      >
+        {children}
+      </OGPClaimProvider>
+    </MyCustomAuthProvider>
+  );
+}
 ```
 
-## License
+## Usage
 
-See LICENSE.md
+Once you've wrapped your app in the `<OGPClaimProvider>`, you can use either the `<OGPClaimButton>` or `useOGPClaim` hook to interact with the SDK.
+
+### `<OGPClaimButton>`
+
+The `<OGPClaimButton>` component is a button that triggers the claim flow.
+
+```tsx
+import { OGPClaimButton } from "@opusgamelabs/claim-react";
+
+const ClaimButton = () => {
+  const { isAuthenticated } = useOGPClaim();
+
+  return (
+    <OGPClaimButton>
+      {isAuthenticated ? "Claim Your Rewards" : "Login to Claim Rewards"}
+    </OGPClaimButton>
+  );
+};
+```
+
+### `useOGPClaim`
+
+The `useOGPClaim` hook returns:
+
+```ts
+type OGPClaimContextType = {
+  playerRewards?: PlayerRewards;
+  isAuthenticated: boolean;
+  isClaiming: boolean;
+  isLoadingRewards: boolean;
+  modalState: ModalState;
+  showModal: (type: ModalState["type"], data?: any) => void;
+  hideModal: () => void;
+  startClaim: () => Promise<void>;
+  createClaimTransactions: (
+    gTokenAddresses: string[]
+  ) => Promise<TransactionWithAddress[] | null>;
+  submitClaimTransactions: (
+    transactions: TransactionWithAddress[],
+    displayPrivyUi?: boolean
+  ) => Promise<SubmitTransactionsResult>;
+  refreshPlayerRewards: () => Promise<void>;
+};
+```
+
+Properties:
+
+- `playerRewards`: The current player's rewards, if the user is authenticated.
+- `isAuthenticated`: A boolean indicating whether the user is authenticated.
+- `isClaiming`: A boolean indicating whether the user is currently claiming rewards.
+- `isLoadingRewards`: A boolean indicating whether the user is currently loading rewards.
+- `modalState`: The current modal state.
+
+Functions:
+
+- `showModal`: Shows a modal with the specified type and data.
+- `hideModal`: Hides the current active modal.
+- `startClaim`: Starts the claim flow.
+- `createClaimTransactions`: Creates the claim transactions for the specified gToken addresses.
+- `submitClaimTransactions`: Submits the claim transactions. `displayPrivyUi` is a boolean indicating whether to display the Privy UI or not.
+- `refreshPlayerRewards`: Refreshes the player's rewards.
+
+## Example Usage
+
+Here's how you can use the `useOGPClaim` hook to create a claim flow, assuming you are not using a custom auth provider:
+
+```tsx
+import { useOGPClaim } from "@opusgamelabs/claim-react";
+
+const ClaimButton = () => {
+  const { login } = useAuth();
+  const { isAuthenticated, startClaim } = useOGPClaim();
+
+  return (
+    <button
+      className="bg-emerald-500 text-white px-4 py-2 rounded-lg"
+      onClick={() => startClaim()}
+    >
+      {isAuthenticated ? "Claim Your Rewards" : "Login to Claim Rewards"}
+    </button>
+  );
+};
+```
+
+If you are using a custom auth provider, you can still use the `useOGPClaim` hook, you'll just want to make sure you are logged in with your custom auth provider before calling `startClaim`.

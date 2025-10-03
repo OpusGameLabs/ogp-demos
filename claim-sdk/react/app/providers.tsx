@@ -1,7 +1,6 @@
 'use client';
 
 import { OGPClaimProvider } from "@opusgamelabs/claim-react";
-import * as React from "react"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 
 function ThemeProvider({
@@ -11,7 +10,7 @@ function ThemeProvider({
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+export default function Providers({ children }: { children: React.ReactNode, useCustomAuth?: boolean }) {
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system">

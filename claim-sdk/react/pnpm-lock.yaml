@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@opusgamelabs/claim-react':
-        specifier: ^0.1.18
-        version: 0.1.18(@emotion/is-prop-valid@1.2.2)(@privy-io/react-auth@3.0.1(@solana-program/memo@0.8.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana-program/system@0.8.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana-program/token@0.6.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3))(@types/react@19.2.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3)(use-sync-external-store@1.6.0(react@19.1.0))(zod@3.25.76))(@tanstack/react-query@5.90.2(react@19.1.0))(fastestsmallesttextencoderdecoder@1.0.22)(react-dom@19.1.0(react@19.1.0))(react-icons@5.5.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3)(ws@8.18.3)
+        specifier: ^0.1.26
+        version: 0.1.26(@emotion/is-prop-valid@1.2.2)(@privy-io/react-auth@3.0.1(@solana-program/memo@0.8.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana-program/system@0.8.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana-program/token@0.6.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3))(@types/react@19.2.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3)(use-sync-external-store@1.6.0(react@19.1.0))(zod@3.25.76))(@tanstack/react-query@5.90.2(react@19.1.0))(fastestsmallesttextencoderdecoder@1.0.22)(jiti@1.21.7)(react-dom@19.1.0(react@19.1.0))(react-icons@5.5.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3)(ws@8.18.3)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -577,8 +577,8 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
-  '@opusgamelabs/claim-react@0.1.18':
-    resolution: {integrity: sha512-Md4XCOrzSzcd8K6kzk8BNU3OxYEMlBSkOipWRpe8BoxajDupItJ1PeGWklFaOF7CyZFpvxbiH1wt/QQz9c6aPQ==, tarball: https://npm.pkg.github.com/download/@opusgamelabs/claim-react/0.1.18/2251ca3e10ff8580ee90b85dd5fe0b1c7bf9bd1b}
+  '@opusgamelabs/claim-react@0.1.26':
+    resolution: {integrity: sha512-be9Il/D1B6EueI9gx69/Je91YNc/RSNkKcdrCkKHOhVZflUV4lo4Pz3XcGRRl7pei/oD6Sgwr05ELWto9jwL6A==, tarball: https://npm.pkg.github.com/download/@opusgamelabs/claim-react/0.1.26/809ac3ea4bcad0e015c48c4b625368afee0327af}
     peerDependencies:
       '@privy-io/react-auth': ^3.0.0
       '@tanstack/react-query': ^5.59.0
@@ -4301,7 +4301,7 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@opusgamelabs/claim-react@0.1.18(@emotion/is-prop-valid@1.2.2)(@privy-io/react-auth@3.0.1(@solana-program/memo@0.8.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana-program/system@0.8.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana-program/token@0.6.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3))(@types/react@19.2.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3)(use-sync-external-store@1.6.0(react@19.1.0))(zod@3.25.76))(@tanstack/react-query@5.90.2(react@19.1.0))(fastestsmallesttextencoderdecoder@1.0.22)(react-dom@19.1.0(react@19.1.0))(react-icons@5.5.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3)(ws@8.18.3)':
+  '@opusgamelabs/claim-react@0.1.26(@emotion/is-prop-valid@1.2.2)(@privy-io/react-auth@3.0.1(@solana-program/memo@0.8.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana-program/system@0.8.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana-program/token@0.6.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3))(@types/react@19.2.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3)(use-sync-external-store@1.6.0(react@19.1.0))(zod@3.25.76))(@tanstack/react-query@5.90.2(react@19.1.0))(fastestsmallesttextencoderdecoder@1.0.22)(jiti@1.21.7)(react-dom@19.1.0(react@19.1.0))(react-icons@5.5.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3)(ws@8.18.3)':
     dependencies:
       '@privy-io/react-auth': 3.0.1(@solana-program/memo@0.8.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana-program/system@0.8.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana-program/token@0.6.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)))(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3))(@types/react@19.2.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3)(use-sync-external-store@1.6.0(react@19.1.0))(zod@3.25.76)
       '@solana-program/memo': 0.8.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3))
@@ -4309,8 +4309,10 @@ snapshots:
       '@solana-program/token': 0.6.0(@solana/kit@3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3))
       '@solana/kit': 3.0.3(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3)
       '@tanstack/react-query': 5.90.2(react@19.1.0)
+      bs58: 6.0.0
       class-variance-authority: 0.7.1
       clsx: 2.1.1
+      eslint: 9.36.0(jiti@1.21.7)
       framer-motion: 12.23.22(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
@@ -4320,6 +4322,8 @@ snapshots:
     transitivePeerDependencies:
       - '@emotion/is-prop-valid'
       - fastestsmallesttextencoderdecoder
+      - jiti
+      - supports-color
       - tsx
       - typescript
       - ws
