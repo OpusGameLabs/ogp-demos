@@ -101,6 +101,9 @@ async function registerGame(gameData) {
     payload.discord = formatUrl(gameData.discord, 'https://discord.gg/');
   }
 
+  // if this is a primitive true|false the backend throws an error complaining about expecting a string
+  payload.isHTMLGame = payload.isHTMLGame ? "true" : "false";
+
   console.log('Submitting game registration:', payload);
 
   const response = await fetch(
