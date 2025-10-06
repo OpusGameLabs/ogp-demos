@@ -9,7 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@opusgamelabs/claim-react": "^0.1.26",
+    "@opusgamelabs/claim-react": "^0.1.28",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.544.0",
