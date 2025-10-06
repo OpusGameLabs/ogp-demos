@@ -24,7 +24,7 @@ Then, you can import styles and components from the package.
 
 **IMPORTANT:** You must import the CSS file in your application for the components to be styled correctly.
 
-Add this import at the top level of your application (e.g., in your main `App.tsx` or `index.tsx`):
+Add this import at the top level of your `global.css`:
 
 ```tsx
 import "@opusgamelabs/claim-react/styles.css";
