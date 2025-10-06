@@ -10,7 +10,7 @@ function ThemeProvider({
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }
 
-export default function Providers({ children }: { children: React.ReactNode, useCustomAuth?: boolean }) {
+export default function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system">
