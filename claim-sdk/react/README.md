@@ -159,7 +159,6 @@ Here's how you can use the `useOGPClaim` hook to create a claim flow, assuming y
 import { useOGPClaim } from "@opusgamelabs/claim-react";
 
 const ClaimButton = () => {
-  const { login } = useAuth();
   const { isAuthenticated, startClaim } = useOGPClaim();
 
   return (
