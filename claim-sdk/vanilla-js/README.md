@@ -9,7 +9,7 @@ This will allow you to create a button that triggers the claim flow using our iF
 Add the script and create buttons with `data-ogp-claim-button`:
 
 ```html
-<script src="./ogp-claim-button-new.js"></script>
+<script src="https://cdn.opengameprotocol.com/ogp-claim-button.latest.min.js"></script>
 
 <button data-ogp-claim-button="my-btn">Claim Rewards</button>
 ```
