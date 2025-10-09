@@ -28,6 +28,14 @@
         color: #667eea;
       }
 
+      .ogp-custom-claim-btn {
+        background: #667eea;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+
       .subtitle {
         font-size: 1rem;
         color: #666;
@@ -165,6 +173,15 @@
               Claim Rewards
             </button>
           </div>
+          <div class="button-demo">
+            <h3>Custom</h3>
+            <p>Roll your own button</p>
+            <button
+              class="ogp-custom-claim-btn"
+              id="custom-claim-btn">
+              Claim Your Rewards
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -177,6 +194,8 @@
       OGPClaimButton.setIcon('https://example.com/assets/my-icon.png');
       // Optional: Set the theme dark/light
       OGPClaimButton.setTheme('dark');
+      // Set custom claim button listener
+      document.getElementById('custom-claim-btn').addEventListener('click', OGPClaimButton.triggerClaim);
     </script>
   </body>
 </html>
