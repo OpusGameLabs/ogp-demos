@@ -261,6 +261,8 @@ app.post(
       await uploadToS3(gameHTMLWithId, gameFileName, "text/html");
       console.log("HTML re-uploaded successfully");
 
+      // NOTE: you will probably want to run a cache invalidation on your CDN here
+
       // Store in local database
       // First, get or create the user
       const user = userDb.getOrCreate(gameData.userEmail);
