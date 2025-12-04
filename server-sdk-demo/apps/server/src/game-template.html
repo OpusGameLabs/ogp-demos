@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="x-ogp-key" content="{{OGP_API_KEY}}" />
+    <title>{{GAME_NAME}}</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: "Arial", sans-serif;
+        color: white;
+      }
+
+      #gameContainer {
+        text-align: center;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      canvas {
+        border: 4px solid white;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        background: #87ceeb;
+        display: none;
+      }
+
+      #ui {
+        margin-top: 20px;
+        display: none;
+        gap: 30px;
+        justify-content: center;
+        font-size: 1.3rem;
+        font-weight: bold;
+      }
+
+      #emailPrompt {
+        padding: 30px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        max-width: 400px;
+      }
+
+      #emailPrompt input {
+        width: 100%;
+        padding: 12px;
+        margin: 15px 0;
+        font-size: 1rem;
+        border: 2px solid white;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      #gameOver {
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+      }
+
+      button {
+        margin-top: 15px;
+        padding: 12px 30px;
+        font-size: 1.1rem;
+        background: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      button:hover {
+        background: #45a049;
+      }
+
+      button:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+      }
+
+      #instructions {
+        margin-top: 20px;
+        font-size: 1rem;
+        opacity: 0.9;
+      }
+
+      .error {
+        color: #ff6b6b;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gameContainer">
+      <h1>{{GAME_NAME}}</h1>
+
+      <div id="emailPrompt">
+        <h2>Enter Your Email</h2>
+        <p>Enter your email to track your score and earn rewards!</p>
+        <input
+          type="email"
+          id="playerEmail"
+          placeholder="your-email@example.com"
+          required
+        />
+        <div id="emailError" class="error"></div>
+        <button onclick="startGameWithEmail()">Start Game</button>
+      </div>
+
+      <canvas id="gameCanvas" width="800" height="400"></canvas>
+      <div id="ui">
+        <div>Score: <span id="score">0</span></div>
+        <div>Lives: <span id="lives">{{LIVES}}</span></div>
+      </div>
+      <div id="gameOver">
+        <h2>Game Over!</h2>
+        <p>Final Score: <span id="finalScore">0</span></p>
+        <p id="scoreStatus">Submitting score...</p>
+        <button onclick="restartGame()">Play Again</button>
+      </div>
+      <div id="instructions" style="display: none">
+        Press SPACE or UP ARROW to jump! Avoid the obstacles!
+      </div>
+    </div>
+
+    <script>
+      const CONFIG = {
+          pointsPerJump: {{POINTS_PER_JUMP}},
+          maxLives: {{LIVES}},
+          apiKey: '{{OGP_API_KEY}}',
+          platformUrl: '{{PLATFORM_API_URL}}',
+          gameId: '{{GAME_ID}}'
+      };
+
+      let playerEmail = '';
+      let sessionId = null;
+
+      const canvas = document.getElementById('gameCanvas');
+      const ctx = canvas.getContext('2d');
+
+      let gameState = {
+          score: 0,
+          lives: CONFIG.maxLives,
+          isGameOver: false,
+          isPaused: false
+      };
+
+      // Player
+      const player = {
+          x: 100,
+          y: canvas.height - 80,
+          width: 40,
+          height: 40,
+          velocityY: 0,
+          isJumping: false,
+          jumpPower: -12,
+          gravity: 0.5,
+          color: '#FFD700'
+      };
+
+      // Ground
+      const ground = {
+          y: canvas.height - 40,
+          height: 40,
+          color: '#8B4513'
+      };
+
+      // Obstacles
+      let obstacles = [];
+      let obstacleTimer = 0;
+      const obstacleInterval = 120;
+
+      function validateEmail(email) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      function startGameWithEmail() {
+          const emailInput = document.getElementById('playerEmail');
+          const email = emailInput.value.trim();
+          const errorDiv = document.getElementById('emailError');
+
+          if (!validateEmail(email)) {
+              errorDiv.textContent = 'Please enter a valid email address';
+              return;
+          }
+
+          playerEmail = email;
+          sessionId = Date.now().toString();
+
+          document.getElementById('emailPrompt').style.display = 'none';
+          canvas.style.display = 'block';
+          document.getElementById('ui').style.display = 'flex';
+          document.getElementById('instructions').style.display = 'block';
+
+          gameLoop();
+      }
+
+      function createObstacle() {
+          return {
+              x: canvas.width,
+              y: ground.y - 30,
+              width: 30,
+              height: 30,
+              speed: 3,
+              color: '#DC143C'
+          };
+      }
+
+      async function submitScoreToAPI(score) {
+          try {
+              console.log('Submitting score:', { playerEmail, score, sessionId, gameId: CONFIG.gameId });
+
+              // Call platform API to record score
+              const response = await fetch(`${CONFIG.platformUrl}/game-scores`, {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${CONFIG.apiKey}`
+                  },
+                  body: JSON.stringify({
+                      playerEmail,
+                      score,
+                      sessionId,
+                      gameId: CONFIG.gameId
+                  })
+              });
+
+              if (!response.ok) {
+                  throw new Error('Failed to submit score');
+              }
+
+              return await response.json();
+          } catch (error) {
+              console.error('Failed to submit score:', error);
+              return { success: false, error: error.message };
+          }
+      }
+
+      function jump() {
+          if (!player.isJumping && !gameState.isGameOver) {
+              player.velocityY = player.jumpPower;
+              player.isJumping = true;
+              gameState.score += CONFIG.pointsPerJump;
+              updateUI();
+          }
+      }
+
+      function updatePlayer() {
+          player.velocityY += player.gravity;
+          player.y += player.velocityY;
+
+          if (player.y >= ground.y - player.height) {
+              player.y = ground.y - player.height;
+              player.velocityY = 0;
+              player.isJumping = false;
+          }
+      }
+
+      function updateObstacles() {
+          obstacleTimer++;
+
+          if (obstacleTimer >= obstacleInterval) {
+              obstacles.push(createObstacle());
+              obstacleTimer = 0;
+          }
+
+          for (let i = obstacles.length - 1; i >= 0; i--) {
+              obstacles[i].x -= obstacles[i].speed;
+
+              if (obstacles[i].x + obstacles[i].width < 0) {
+                  obstacles.splice(i, 1);
+              }
+          }
+      }
+
+      function checkCollisions() {
+          for (let obstacle of obstacles) {
+              if (player.x < obstacle.x + obstacle.width &&
+                  player.x + player.width > obstacle.x &&
+                  player.y < obstacle.y + obstacle.height &&
+                  player.y + player.height > obstacle.y) {
+
+                  gameState.lives--;
+                  updateUI();
+
+                  obstacles = obstacles.filter(o => o !== obstacle);
+
+                  if (gameState.lives <= 0) {
+                      endGame();
+                  }
+                  break;
+              }
+          }
+      }
+
+      function drawPlayer() {
+          ctx.fillStyle = player.color;
+          ctx.fillRect(player.x, player.y, player.width, player.height);
+
+          // Eyes
+          ctx.fillStyle = 'black';
+          ctx.fillRect(player.x + 10, player.y + 10, 5, 5);
+          ctx.fillRect(player.x + 25, player.y + 10, 5, 5);
+
+          // Smile
+          ctx.beginPath();
+          ctx.arc(player.x + 20, player.y + 25, 8, 0, Math.PI);
+          ctx.stroke();
+      }
+
+      function drawObstacles() {
+          for (let obstacle of obstacles) {
+              ctx.fillStyle = obstacle.color;
+              ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+          }
+      }
+
+      function drawGround() {
+          ctx.fillStyle = ground.color;
+          ctx.fillRect(0, ground.y, canvas.width, ground.height);
+
+          // Grass effect
+          ctx.fillStyle = '#228B22';
+          for (let i = 0; i < canvas.width; i += 10) {
+              ctx.fillRect(i, ground.y - 5, 5, 5);
+          }
+      }
+
+      function drawSky() {
+          const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+          gradient.addColorStop(0, '#87CEEB');
+          gradient.addColorStop(1, '#E0F6FF');
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, canvas.width, ground.y);
+      }
+
+      function updateUI() {
+          document.getElementById('score').textContent = gameState.score;
+          document.getElementById('lives').textContent = gameState.lives;
+      }
+
+      async function endGame() {
+          gameState.isGameOver = true;
+          document.getElementById('finalScore').textContent = gameState.score;
+          document.getElementById('gameOver').style.display = 'block';
+
+          const statusEl = document.getElementById('scoreStatus');
+          statusEl.textContent = 'Submitting score...';
+
+          const result = await submitScoreToAPI(gameState.score);
+
+          if (result.success) {
+              statusEl.textContent = '✅ Score submitted successfully!';
+              statusEl.style.color = '#4CAF50';
+          } else {
+              statusEl.textContent = '⚠️ Failed to submit score. Please try again.';
+              statusEl.style.color = '#ff6b6b';
+          }
+      }
+
+      function restartGame() {
+          gameState = {
+              score: 0,
+              lives: CONFIG.maxLives,
+              isGameOver: false,
+              isPaused: false
+          };
+          obstacles = [];
+          obstacleTimer = 0;
+          player.y = canvas.height - 80;
+          player.velocityY = 0;
+          player.isJumping = false;
+          sessionId = Date.now().toString();
+          updateUI();
+          document.getElementById('gameOver').style.display = 'none';
+          gameLoop();
+      }
+
+      function gameLoop() {
+          if (gameState.isGameOver) return;
+
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          drawSky();
+          drawGround();
+          updatePlayer();
+          updateObstacles();
+          checkCollisions();
+          drawPlayer();
+          drawObstacles();
+
+          requestAnimationFrame(gameLoop);
+      }
+
+      // Controls
+      document.addEventListener('keydown', (e) => {
+          if (e.code === 'Space' || e.code === 'ArrowUp') {
+              e.preventDefault();
+              jump();
+          }
+      });
+
+      canvas.addEventListener('click', jump);
+
+      // Enter key to start game
+      document.getElementById('playerEmail').addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+              startGameWithEmail();
+          }
+      });
+    </script>
+  </body>
+</html>
